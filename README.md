@@ -9,6 +9,7 @@
 * Lexicographic recursive permutations
 * Permutations with constraints (constraint satisfaction)
 * Multiset permutations (with repeated elements)
+  _______
 
 ### Module 2: Iterative Algorithms
 
