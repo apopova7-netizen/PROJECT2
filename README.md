@@ -38,5 +38,5 @@
 * Optional step-by-step visualization
    _______
 ## Requirements
--C11 compatible compiler GCC
--Make
+*-C11 compatible compiler GCC
+*-Make
