@@ -18,6 +18,7 @@
 * Factorial number system (permutation by index)
 * Inversion table based generation
 * Incremental (“plus-one”) permutation generation
+   _______
 
 ### Module 3: Optimized Algorithms
 
@@ -26,6 +27,7 @@
 * Minimal-change (Gray code–like) permutations
 * Cycle leader algorithm
 * Bitmask-based generation (for small n)
+   _______
 
 ### Module 4: Infrastructure
 
@@ -35,3 +37,4 @@
 * Built-in benchmarks
 * Unit tests and correctness verification
 * Optional step-by-step visualization
+   _______
