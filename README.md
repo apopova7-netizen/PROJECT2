@@ -37,6 +37,9 @@
 * Unit tests and correctness verification
 * Optional step-by-step visualization
    _______
+## Build  
+
 ## Requirements
-* -C11 compatible compiler GCC
-* -Make
+* C11 compatible compiler GCC
+* Make
+* Linux with command line
