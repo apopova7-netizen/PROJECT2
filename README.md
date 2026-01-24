@@ -11,7 +11,7 @@
 * Multiset permutations (with repeated elements)
   _______
 
-### Module 2: Iterative Algorithms
+### **Module 2: Iterative Algorithms**
 
 * Narayana next_permutation algorithm
 * Reverse (prev_permutation) generation
@@ -20,7 +20,7 @@
 * Incremental (“plus-one”) permutation generation
    _______
 
-### Module 3: Optimized Algorithms
+### **Module 3: Optimized Algorithms**
 
 * Johnson–Trotter algorithm (minimal changes)
 * Heap’s algorithm (minimal swaps)
@@ -29,7 +29,7 @@
 * Bitmask-based generation (for small n)
    _______
 
-### Module 4: Infrastructure
+### **Module 4: Infrastructure**
 
 * Unified API for all algorithms
 * Iterator-based interface
