@@ -1,6 +1,6 @@
 # Algorithmic-Combinatorics-Permutation-Library
 ##
-## Features
+## **Features**
 
 ### Module 1: Recursive Algorithms
 
