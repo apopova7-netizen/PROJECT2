@@ -1,21 +1,10 @@
 # Algorithmic-Combinatorics-Permutation-Library
 ## Quick Start
+```bash
 * git clone ...
 * cd ...
 * make test
 * make examples
-## Сборка и запуск проекта
-
-В проекте используются Makefile и несколько студентов с примерами и тестами.
-
----
-
-### Запуск всех примеров
-
-Собрать и запустить все примеры для всех студентов:
-
-`bash
-make examples
 
 ## **Features**
 
