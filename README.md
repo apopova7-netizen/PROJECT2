@@ -1,9 +1,10 @@
 # Algorithmic-Combinatorics-Permutation-Library
 ## Quick Start
-### git clone 
-### cd 
-### make test
-### make examples
+#### git clone ...
+#### cd ...
+#### make test
+#### make examples
+
 ## **Features**
 
 ### Module 1: Recursive Algorithms
