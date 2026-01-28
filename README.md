@@ -46,16 +46,22 @@
 * Optional step-by-step visualization
    _______
 ## Build  
+```bush
 * make test          
 * make examples      
-* make clean         
+* make clean
+```       
 
 ## If you need to run the tests for a single student separately
+```bush
 * make TestProgram1/2/3/4
 * ./TestProgram1/2/3/4
+```
 ## If you need to run the examples for a single student separately
+```bush
 * make ExamplesProgram1/2/3/4
 * ./ExamplesProgram1/2/3/4
+```
 
 ## Requirements
 * C11 compatible compiler GCC
