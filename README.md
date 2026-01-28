@@ -52,15 +52,15 @@
 * make clean
 ```       
 
-## If you need to run the tests for a single student separately
+## If you need to run the tests for a single student separately  (for example, for the first student)
 ```bush
-* make TestProgram1/2/3/4
-* ./TestProgram1/2/3/4
+* make TestProgram1
+* ./TestProgram1
 ```
-## If you need to run the examples for a single student separately
+## If you need to run the examples for a single student separately (for example, for the first student)
 ```bush
-* make ExamplesProgram1/2/3/4
-* ./ExamplesProgram1/2/3/4
+* make ExamplesProgram1
+* ./ExamplesProgram1
 ```
 
 ## Requirements
