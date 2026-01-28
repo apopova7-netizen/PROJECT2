@@ -1,10 +1,10 @@
 # Algorithmic-Combinatorics-Permutation-Library
 ## Quick Start
 ```bash
-* git clone ...
-* cd ...
-* make test
-* make examples
+git clone ...
+cd ...
+make test
+make examples
 ```
 
 ## **Features**
@@ -47,20 +47,20 @@
    _______
 ## Build  
 ```bush
-* make test          
-* make examples      
-* make clean
+make test          
+make examples      
+make clean
 ```       
 
 ## If you need to run the tests for a single student separately  (for example, for the first student)
 ```bush
-* make TestProgram1
-* ./TestProgram1
+make TestProgram1
+./TestProgram1
 ```
 ## If you need to run the examples for a single student separately (for example, for the first student)
 ```bush
-* make ExamplesProgram1
-* ./ExamplesProgram1
+make ExamplesProgram1
+./ExamplesProgram1
 ```
 
 ## Requirements
