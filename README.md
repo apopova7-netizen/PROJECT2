@@ -1,9 +1,9 @@
 # Algorithmic-Combinatorics-Permutation-Library
 ## Quick Start
-#### git clone ...
-#### cd ...
-#### make test
-#### make examples
+* git clone ...
+* cd ...
+* make test
+* make examples
 
 ## **Features**
 
@@ -44,9 +44,9 @@
 * Optional step-by-step visualization
    _______
 ## Build  
-#### *make test          #Run tests
-#### *make examples      #Run examples
-#### *make clean         #Clean build artifacts
+* make test          #Run tests
+* make examples      #Run examples
+* make clean         #Clean build artifacts
 
 ## If you need to run the tests for a single student separately
 ### make TestProgram1/2/3/4
