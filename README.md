@@ -4,7 +4,8 @@
 * git clone ...
 * cd ...
 * make test
-* make examples```
+* make examples
+```
 
 ## **Features**
 
