@@ -44,16 +44,16 @@
 * Optional step-by-step visualization
    _______
 ## Build  
-* make test          #Run tests
-* make examples      #Run examples
-* make clean         #Clean build artifacts
+* make test          
+* make examples      
+* make clean         
 
 ## If you need to run the tests for a single student separately
-### make TestProgram1/2/3/4
-### ./TestProgram1/2/3/4
+* make TestProgram1/2/3/4
+* ./TestProgram1/2/3/4
 ## If you need to run the examples for a single student separately
-### make ExamplesProgram1/2/3/4
-### ./ExamplesProgram1/2/3/4
+* make ExamplesProgram1/2/3/4
+* ./ExamplesProgram1/2/3/4
 
 ## Requirements
 * C11 compatible compiler GCC
