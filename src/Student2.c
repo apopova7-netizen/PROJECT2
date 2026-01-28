@@ -14,7 +14,7 @@ void Reverse(int* arr, int start, int end) {
 
     while (start < end) {
 
-        const int tmp = *(arr + start);
+        int tmp = *(arr + start);
         *(arr + start) = *(arr + end);
         *(arr + end) = tmp;
 
@@ -131,8 +131,8 @@ bool PrevPermutationNarayana(int* arr, int n) {
 void PermutationNarayana(int arr[],int n,
                           void (*callback)(int* perm, int n)) {
 
-    if ( n < 0 || n > MAX_LENGTH_ARRAY) {
-        puts("The length of the array must be in the range [0,12].");
+    if ( n <= 0 || n > MAX_LENGTH_ARRAY) {
+        puts("The length of the array must be in the range [1,12].");
         return;
     }
 
@@ -165,8 +165,8 @@ void PermutationNarayana(int arr[],int n,
 void PermutationReverseNarayana(int arr[], int n,
                           void (*callback)(int* perm, int n)) {
 
-    if ( n < 0 || n > MAX_LENGTH_ARRAY) {
-        puts("The length of the array must be in the range [0,12].");
+    if ( n <= 0 || n > MAX_LENGTH_ARRAY) {
+        puts("The length of the array must be in the range [1,12].");
         return;
     }
 
@@ -236,8 +236,8 @@ bool ChooseStepPermutationNarayana(int* arr,int n, int direction) {
 void ChoosePermutationNarayana(int arr[],int n,
                           void (*callback)(int* perm, int n),int direction){
 
-    if ( n < 0 || n > MAX_LENGTH_ARRAY) {
-        puts("The length of the array must be in the range [0,12].");
+    if ( n <= 0 || n > MAX_LENGTH_ARRAY) {
+        puts("The length of the array must be in the range [1,12].");
         return;
     }
 
@@ -343,8 +343,8 @@ free(copy);
 void PermutationsFactorialSystem(int arr[],int n,
                                   void (*callback)(int* perm, int n)) {
 
-    if ( n < 0 || n > MAX_LENGTH_ARRAY) {
-        puts("The length of the array must be in the range [0,12].");
+    if ( n <= 0 || n > MAX_LENGTH_ARRAY) {
+        puts("The length of the array must be in the range [1,12].");
         return;
     }
 
@@ -517,8 +517,8 @@ void Sorting2dBubble(int** arr,int quantityPerm,int n) {
  *based on them , and then outputs them in lexicographic order.*/
 void PermutationsInversionTable(int arr[],int n,void (*callback)(int* perm, int n)) {
 
-    if ( n < 0 || n > MAX_LENGTH_ARRAY) {
-        puts("The length of the array must be in the range [0,12].");
+    if ( n <= 0 || n > MAX_LENGTH_ARRAY) {
+        puts("The length of the array must be in the range [1,12].");
         return;
     }
 
@@ -611,8 +611,8 @@ void PermutationsInversionTable(int arr[],int n,void (*callback)(int* perm, int 
 void PermutationsPlusOne(int arr[], int n,
                             void (*callback)(int* perm, int n)) {
 
-    if ( n < 0 || n > MAX_LENGTH_ARRAY) {
-        puts("The length of the array must be in the range [0,12].");
+    if ( n <= 0 || n > MAX_LENGTH_ARRAY) {
+        puts("The length of the array must be in the range [1,12].");
         return;
     }
 
@@ -699,6 +699,13 @@ void PermutationsPlusOne(int arr[], int n,
     free(copy);
     free(newcopy);
 }
+
+
+
+
+
+
+
 
 
 
