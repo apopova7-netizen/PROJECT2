@@ -10,7 +10,7 @@
 #define ASSERT_EQUAL(a, b) ASSERT_TRUE((a) == (b))
 #define ASSERT_FALSE(cond) ASSERT_TRUE(!(cond))
  
-static int callbackCount = 0;
+int callbackCount = 0;
 
 void CountingCallback(int perm[], int n) {
     (void)perm;
@@ -35,9 +35,18 @@ void TestPermutationsBacktrack() {
     int arr[] = {1, 2, 3};
     int n = 3;
     callbackCount = 0;
-
     PermutationsBacktrack(arr, n, CountingCallback);
     ASSERT_EQUAL(callbackCount, 6);
+
+    int arr2[] = {42};
+    callbackCount = 0;
+    PermutationsBacktrack(arr2, 1, CountingCallback);
+    ASSERT_EQUAL(callbackCount, 1);
+    
+    int arr3[] = {1, 1};
+    callbackCount = 0;
+    PermutationsBacktrack(arr3, 2, CountingCallback);
+    ASSERT_EQUAL(callbackCount, 2); 
     printf("Test PermutationsBacktrack() PASSED!\n");
 }
 
@@ -66,11 +75,23 @@ void TestPermutationsRecursiveSwap() {
 void TestQuickSort() {
     int arr[] = {3, 1, 2};
     int n = 3;
-    
     QuickSort(arr, 0, n - 1);
     ASSERT_EQUAL(arr[0], 1);
     ASSERT_EQUAL(arr[1], 2);
     ASSERT_EQUAL(arr[2], 3);
+
+    int arr2[] = {42};
+    QuickSort(arr2, 0, 0);
+    ASSERT_EQUAL(arr2[0], 42);
+    
+    int arr3[] = {3, 1, 3, 2, 1};
+    QuickSort(arr3, 0, 4);
+    ASSERT_EQUAL(arr3[0], 1);
+    ASSERT_EQUAL(arr3[1], 1);
+    ASSERT_EQUAL(arr3[2], 2);
+    ASSERT_EQUAL(arr3[3], 3);
+    ASSERT_EQUAL(arr3[4], 3);
+
     printf("Test QuickSort() PASSED!\n");
 }
 
@@ -93,7 +114,7 @@ void TestPermRecursiveLexicographic() {
 
     PermRecursiveLexicographic(arr, n, CountingCallback);
     ASSERT_EQUAL(callbackCount, 6);
-    printf("!Test PermRecursiveLexicographic() PASSED!\n");
+    printf("Test PermRecursiveLexicographic() PASSED!\n");
 }
 
 
@@ -228,6 +249,11 @@ void TestSwap() {
     ASSERT_EQUAL(a, 1);
     ASSERT_EQUAL(b, 2);
     
+    a = b = 5;
+    Swap(&a, &b);
+    ASSERT_EQUAL(a, 5);
+    ASSERT_EQUAL(b, 5);
+
     printf("Test Swap() PASSED!\n");
 }
 
@@ -260,6 +286,28 @@ void TestMultisetPermutations() {
     printf("Test MultisetPermutations() PASSED!\n");
 }
 
+void TestEmptyArray() {
+    int arr[] = {};
+    int n = 0;
+    
+    callbackCount = 0;
+    PermutationsBacktrack(arr, n, CountingCallback);
+    ASSERT_EQUAL(callbackCount, 1);
+    
+    callbackCount = 0;
+    PermutationsRecursiveSwap(arr, n, CountingCallback);
+    ASSERT_EQUAL(callbackCount, 1);
+    
+    callbackCount = 0;
+    PermRecursiveLexicographic(arr, n, CountingCallback);
+    ASSERT_EQUAL(callbackCount, 1);
+    
+    callbackCount = 0;
+    PermutationsWithConstraints(arr, n, NULL, NULL, CountingCallback);
+    ASSERT_EQUAL(callbackCount, 0); 
+    
+    printf("Test EmptyArray() PASSED!\n");
+}
 
 void TestEdgeCases() {
     int one_element[] = {42};
@@ -268,10 +316,14 @@ void TestEdgeCases() {
     ASSERT_EQUAL(callbackCount, 1); 
     
     int duplicate_arr[] = {7, 7};
-    callbackCount = 0;
+    callbackCount = 0; 
     PermutationsBacktrack(duplicate_arr, 2, CountingCallback);
     ASSERT_EQUAL(callbackCount, 2); 
     
+    int large_arr[] = {1, 2, 3, 4, 5};
+    callbackCount = 0;
+    PermutationsBacktrack(large_arr, 5, CountingCallback);
+    ASSERT_EQUAL(callbackCount, 120); 
     printf("Test Edge Cases PASSED!\n");
 }
 
@@ -293,9 +345,10 @@ int main() {
     TestPermutationsWithConstraints();
     TestGenerateUniquePermutations(); 
     TestMultisetPermutations();   
+    TestEmptyArray();
     TestEdgeCases();           
     TestCacheFunctions();
     
     printf("\nAll tests completed successfully!\n");
     return EXIT_SUCCESS;
-}
+} 
