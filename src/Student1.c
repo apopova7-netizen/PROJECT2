@@ -23,9 +23,15 @@ void Generate(int* arr, int n, int* curPerm, int depth,
 of all permutations using backtracking */
 void PermutationsBacktrack(int arr[], int n, 
                            void (*callback)(int perm[], int n)) {
-    if (arr == NULL || n <= 0) {
+    if (arr == NULL || n < 0) {
         fprintf(stderr, "Error: incorrect input parameters\n");
         return;
+    }
+    if (n == 0) {
+        if (callback != NULL) {
+            callback(NULL, 0);
+        }
+        return; 
     }
     int* curPerm = (int*)malloc(n * sizeof(int));
     if (curPerm == NULL) {
@@ -64,8 +70,14 @@ void GenerateSwap(int arr[], int n, int depth,
 /* A function that organizes the recursive generation of permutations */
 void PermutationsRecursiveSwap(int arr[], int n,
                                void (*callback)(int perm[], int n)) {
-    if (arr == NULL || n <= 0) {
+    if (arr == NULL || n < 0) {
         fprintf(stderr, "Error: incorrect input parameters\n");
+        return;
+    }
+    if (n == 0) {
+        if (callback != NULL) {
+            callback(NULL, 0);
+        }
         return;
     }
     GenerateSwap(arr, n, 0, callback);
@@ -110,7 +122,13 @@ void GeneratePermutations(int arr[], int start, int end,
 of all permutations in lexicographic order */
 void PermRecursiveLexicographic(int arr[], int n, 
                                 void (*callback)(int perm[], int n)) {
-    if (arr == NULL || n <= 0) return;
+    if (arr == NULL || n < 0) return;
+    if (n == 0) {
+        if (callback != NULL) {
+            callback(NULL, 0);
+        }
+        return;
+    }
     int* sortArr = malloc(n * sizeof(int));
     if (!sortArr) return;
     memcpy(sortArr, arr, n * sizeof(int));
@@ -239,10 +257,17 @@ void GenerateUniquePermutations(int arr[], int n, int start, int result[],
 
 /* The main method of generating permutations */
 void MultisetPermutations(int arr[], int n, void (*callback)(int perm[], int n)) {
+    if (arr == NULL || n < 0) return;  
+    if (n == 0) {
+        if (callback != NULL) {
+            callback(NULL, 0);
+        }
+        return;
+    }
     QuickSort(arr, 0, n - 1); 
     int* result = malloc(n * sizeof(int)); 
     if (!result) return;
     memcpy(result, arr, n * sizeof(int));
     GenerateUniquePermutations(arr, n, 0, result, callback);
     free(result);
-}
+} 
