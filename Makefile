@@ -8,14 +8,14 @@ TestProgram%: Student%.o TestStudent%.o
 	$(CC) Student$*.o TestStudent$*.o -o TestProgram$*
 
 
-Student%.o: Student%.c Student%.h
-	$(CC) -c Student$*.c -o Student$*.o
+Student%.o: src/Student%.c include/Student%.h
+	$(CC) -Iinclude -c src/Student$*.c -o Student$*.o
 
-ExamplesStudent%.o: ExamplesStudent%.c Student%.h
-	$(CC) -c ExamplesStudent$*.c -o ExamplesStudent$*.o
+ExamplesStudent%.o: examples/ExamplesStudent%.c include/Student%.h
+	$(CC) -Iinclude -c examples/ExamplesStudent$*.c -o ExamplesStudent$*.o
 
-TestStudent%.o: TestStudent%.c Student%.h
-	$(CC) -c TestStudent$*.c -o TestStudent$*.o
+TestStudent%.o: tests/TestStudent%.c include/Student%.h
+	$(CC) -Iinclude -c tests/TestStudent$*.c -o TestStudent$*.o
 
 
 examples: ExamplesProgram1 ExamplesProgram2 ExamplesProgram3 ExamplesProgram4
