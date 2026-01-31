@@ -1,8 +1,8 @@
 # Algorithmic-Combinatorics-Permutation-Library
 ## Quick Start
 ```bash
-git clone https://github.com/apopova7-netizen/PROJECT2.git
-cd PROJECT2.git
+git clone 
+cd PROJECT2
 make test
 make examples
 ```
