@@ -393,7 +393,7 @@ int TestNextPermutationNarayana() {
                                         " should not change");
     printf("=======================\n");
 
-    int arr3[] = {42};
+    int arr3[] = {12};
 
     printf("Before: ");
     PrintPermutation(arr3,1);
@@ -443,7 +443,7 @@ int TestPrevPermutationNarayana() {
                                         " change");
     printf("=======================\n");
 
-    int arr3[] = {42};
+    int arr3[] = {22};
 
     printf("Before: ");
     PrintPermutation(arr3,1);
@@ -850,6 +850,7 @@ int main() {
     return 0;
 
 }
+
 
 
 
