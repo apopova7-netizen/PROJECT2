@@ -1,10 +1,11 @@
 # Algorithmic-Combinatorics-Permutation-Library
 ## Quick Start
 ```bash
-git clone 
+git clone https://github.com/apopova7-netizen/PROJECT2.git
 cd PROJECT2
-make test
 make examples
+make tests
+make clean
 ```
 
 ## **Features**
@@ -47,8 +48,8 @@ make examples
    _______
 ## Build  
 ```bush
-make test          
-make examples      
+make exsamples         
+make tests
 make clean
 ```       
 
@@ -65,5 +66,4 @@ make ExamplesProgram1
 
 ## Requirements
 * C11 compatible compiler GCC
-* Make
-* Linux with command line
+* Linux with command line or Windows with MSYS2 
