@@ -40,11 +40,10 @@ make clean
 ### **Module 4: Infrastructure**
 
 * Unified API for all algorithms
+* Сorrectness verification
 * Iterator-based interface
 * Automatic algorithm selection
 * Built-in benchmarks
-* Unit tests and correctness verification
-* Optional step-by-step visualization
    _______
 ## Build  
 ```bush
