@@ -13,23 +13,22 @@ static void Swap(int* a, int* b) {
  * Generates permutations by moving the largest mobile element.
  */
 void PermutationsJohnsonTrotter(int arr[], int n,
-    void (*callback)(int* perm, int n))
-{
-    if (n <= 0 || callback == NULL) 
+    void (*callback)(int* perm, int n)){
+    if (n <= 0 || callback == NULL)
         return;
 
     int* dir = malloc(n * sizeof(int));
     int* pos = malloc(n * sizeof(int));
 
-    if (!dir || !pos) {
+    if (dir == NULL || pos == NULL) {
         puts("Memory allocation error");
         free(dir);
         free(pos);
-        return;
+        exit(EXIT_FAILURE);
     }
 
-    /*Initialize directions(left = -1) and positions*/
     for (int i = 0; i < n; i++) {
+        *(arr + i) = i + 1;
         *(dir + i) = -1;
         *(pos + i) = i;
     }
@@ -38,35 +37,30 @@ void PermutationsJohnsonTrotter(int arr[], int n,
 
     while (1) {
         int largestMobile = -1;
-        int mobileIndex = -1;
+        for (int v = 1; v <= n; v++) {
+            int index = v - 1;
+            int p = *(pos + index);
+            int next = p + *(dir + index);
 
-        /*Find the largest mobile element*/
-        for (int i = 0; i < n; i++) {
-            int currentPos = *(pos + i);
-            int nextPos = currentPos + *(dir + i);
-
-            if (nextPos >= 0 && nextPos < n &&
-                *(arr + currentPos) > *(arr + nextPos))
-                if (*(arr + currentPos) > largestMobile) {
-                    largestMobile = *(arr + currentPos);
-                    mobileIndex = i;
-                }
+            if (next >= 0 && next < n && *(arr + p) > *(arr + next))
+                if (v > largestMobile)
+                    largestMobile = v;
         }
 
-        if (mobileIndex == -1) 
+        if (largestMobile == -1)
             break;
 
-        /*Move the mobile element*/
-        int oldPos = *(pos + mobileIndex);
-        int newPos = oldPos + *(dir + mobileIndex);
+        int index = largestMobile - 1;
+        int p = *(pos + index);
+        int next = p + *(dir + index);
 
-        Swap(arr + oldPos, arr + newPos);
-        *(pos + mobileIndex) = newPos;
+        Swap(arr + p, arr + next);
 
-        /*Reverse directions of all elements larger than the mobile element*/
-        for (int i = 0; i < n; i++)
-            if (*(arr + i) > largestMobile)
-                *(dir + i) = -*(dir + i);
+        *(pos + *(arr + p) - 1) = p;
+        *(pos + *(arr + next) - 1) = next;
+
+        for (int value = largestMobile + 1; value <= n; value++)
+            *(dir + value - 1) = -*(dir + value - 1);
 
         callback(arr, n);
     }
@@ -80,8 +74,7 @@ void PermutationsJohnsonTrotter(int arr[], int n,
  * Generates permutations with minimal swaps.
  */
 void PermutationsHeap(int arr[], int n,
-    void (*callback)(int* perm, int n))
-{
+    void (*callback)(int* perm, int n)){
     if (n <= 0 || callback == NULL) 
         return;
 
@@ -118,8 +111,7 @@ void PermutationsHeap(int arr[], int n,
  * Each step differs by a single adjacent transposition.
  */
 void PermutationsMinimalChange(int arr[], int n,
-    void (*callback)(int* perm, int n))
-{
+    void (*callback)(int* perm, int n)){
     if (n <= 0 || callback == NULL) 
         return;
 
@@ -156,21 +148,36 @@ void PermutationsMinimalChange(int arr[], int n,
  * TASK 3.4: Cycle leader algorithm
  * Cycles elements to generate permutations.
  */
+static void RotateLeft(int arr[], int start, int end){
+    int temp = *(arr + start);
+    for (int i = start; i < end; i++)
+        *(arr + i) = *(arr + i + 1);
+    *(arr + end) = temp;
+}
+
+static void GenerateCycles(int arr[], int n, int start,
+    void (*callback)(int*, int)){
+    if (start == n - 1) {
+        callback(arr, n);
+        return;
+    }
+
+    for (int i = start; i < n; i++) {
+        RotateLeft(arr, start, i);
+        GenerateCycles(arr, n, start + 1, callback);
+
+        /* restore array */
+        for (int j = i; j > start; j--)
+            Swap(arr + j, arr + j - 1);
+    }
+}
+
 void PermutationsCycleLeader(int arr[], int n,
-    void (*callback)(int* perm, int n))
-{
-    if (n <= 0 || callback == NULL) 
+    void (*callback)(int* perm, int n)){
+    if (n <= 0 || callback == NULL)
         return;
 
-    callback(arr, n);
-
-    for (int shift = 1; shift < n; shift++) {
-        int temp = *arr;
-        for (int i = 0; i < n - 1; i++)
-            *(arr + i) = *(arr + i + 1);
-        *(arr + n - 1) = temp;
-        callback(arr, n);
-    }
+    GenerateCycles(arr, n, 0, callback);
 }
 
 /*
@@ -178,8 +185,7 @@ void PermutationsCycleLeader(int arr[], int n,
  * Generates permutations using factorial number system.
  */
 void PermutationsBinaryMasks(int arr[], int n,
-    void (*callback)(int* perm, int n))
-{
+    void (*callback)(int* perm, int n)){
     if (n <= 0 || n > 16 || callback == NULL) 
         return;
 
@@ -197,14 +203,15 @@ void PermutationsBinaryMasks(int arr[], int n,
         return;
     }
 
-    for (int idx = 0; idx < total; idx++) {
-        int val = idx;
+    for (int k = 0; k < total; k++) {
+        int val = k;
         for (int i = 0; i < n; i++)
             *(used + i) = 0;
 
         for (int i = 0; i < n; i++) {
             int fact = 1;
-            for (int j = 2; j <= n - 1 - i; j++) fact *= j;
+            for (int j = 2; j <= n - 1 - i; j++) 
+                fact *= j;
             if (fact == 0) fact = 1;
 
             int chosen = val / fact;
@@ -237,8 +244,7 @@ void PermutationsBinaryMasks(int arr[], int n,
  * Fast generation with near-lexicographic order.
  */
 void PermutationsPseudoLexicographic(int arr[], int n,
-    void (*callback)(int* perm, int n))
-{
+    void (*callback)(int* perm, int n)){
     if (n <= 0 || callback == NULL) 
         return;
 

@@ -102,7 +102,7 @@ int TestPermutationsCycleLeader() {
 
     CallbackCounter = 0;
     PermutationsCycleLeader(arr, 3, CountingCallback);
-    CHECK(CallbackCounter == 3, "Cycle leader generates 3 shifts for 3 elements");
+    CHECK(CallbackCounter == 6, "Cycle leader generates 6 shifts for 3 elements");
 
     CallbackCounter = 0;
     PermutationsCycleLeader(arr_single, 1, CountingCallback);
