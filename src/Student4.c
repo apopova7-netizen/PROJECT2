@@ -102,7 +102,7 @@ void AllPermutationBenchmark(int n){
     }
     printf("Benchmark(n = %d)\n", n);
     for(int i = 0; i < n; i++)
-        (testArr + i) = i + 1;
+        *(testArr + i) = i + 1;
     const char* names[] = {
         "Backtrack(S1)", "Swap Recursive(S1)", "Lex Recursive(S1)", "Constrained(S1)", "Multiset(S1)",
         "Narayana(S2)", "Factorial System(S2)", "Inversion Table(S2)", "Plus One(S2)",
@@ -136,7 +136,7 @@ void PermutationBenchmark(int* arr, int n, PermutationParams params){
     ExecutePermutation(arr, n, params);
     clock_t end = clock();
     double algTime = ((double) (end - start)) / CLOCKS_PER_SEC;
-    printf("%s %f\n", params.method, algTime);
+    printf("%d %f\n", params.method, algTime);
 }
 
 /*
