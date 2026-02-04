@@ -130,7 +130,7 @@ int TestNoDuplicate() {
 }
 
 
-int TestFactorial() {
+int TestFactorial2() {
     START("Factorial");
 
     CHECK(Factorial(0) == 1, "0! should be 1");
@@ -807,7 +807,7 @@ int main() {
     TestReverse();
     TestSorting();
     TestNoDuplicate();
-    TestFactorial();
+    TestFactorial2();
     TestSorting2dBubble();
     TestCreateList();
     TestIsEmpty();
@@ -850,6 +850,7 @@ int main() {
     return 0;
 
 }
+
 
 
 
