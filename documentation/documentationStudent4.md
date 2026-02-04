@@ -36,24 +36,3 @@ Performs a specific algorithm with built-in security checks (Checks that `arr !=
 The module evaluates the algorithm execution speed 
 Uses "clock_t" to calculate the time
 The callback counts the number of permutations without console I/O.
-    
-## 4.  Example
-``` C
-#include "interface.h"
-
-// callback to print results
-void print_handler(int* p, int n) { /* ... */ }
-
-int main(){
-    int data[] = {1, 2, 3, 4, 5};
-    
-    // Heap's Algorithm
-    PermutationParams params = { .method = PERM_HEAP, .callback = print_handler };
-    ExecutePermutation(data, 5, params);
-
-    // adaptive selection
-    ExecuteAdaptivePermutation(data, 5, print_handler);
-
-    return 0;
-}
-```
