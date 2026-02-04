@@ -80,8 +80,9 @@ void ExecutePermutation(int* arr, int n, PermutationParams params){
 
 /*
 4.2 benchmarking
-creates an array of n elements(filled from 1-n+1)
+1) creates an array of n elements(filled from 1-n+1)
 and checks the execution time for each algorithm.
+2) checks the execution time for algorithm
 */
 // iteration counter
 void BenchmarkCallback(int* perm, int n) {
@@ -93,7 +94,7 @@ bool BenchmarkConstraint(int* partial, int k, int next, void* data) {
     return true; 
 }
 
-void Benchmark(int n){
+void AllPermutationBenchmark(int n){
     int* testArr = (int*)malloc(n * sizeof(int));
     if (testArr == NULL){
         puts("Error: malloc");
@@ -130,6 +131,14 @@ void Benchmark(int n){
     printf("Benchmark end\n");
 }
 
+void PermutationBenchmark(int* arr, int n, PermutationParams params){
+    clock_t start = clock();
+    ExecutePermutation(arr, n, params);
+    clock_t end = clock();
+    double algTime = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("%s %f\n", params.method, algTime);
+}
+
 /*
 4.4 adaptive selection
 without additional data
@@ -146,18 +155,16 @@ void ExecuteAdaptivePermutation(int* arr, int n, void (*callback)(int*, int)) {
     PermutationParams params;
     params.callback = callback;
     // there are identical numbers
-    if (HasDuplicates(arr, n)) {
+    if (HasDuplicates(arr, n)){
         params.method = PERM_MULTISET;
     } 
     // large amount of data
-    else if (n >= 11) {
+    else if (n >= 11){
         params.method = PERM_HEAP;
     } 
     // others
-    else {
-
+    else{
         params.method = PERM_JOHNSON_TROTTER; 
     }
-
     ExecutePermutation(arr, n, params);
 }
