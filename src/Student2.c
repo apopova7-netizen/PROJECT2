@@ -2,7 +2,7 @@
 #include "Student2.h"
 
 //2.1, 2.5
-void Swap(int* a1, int* a2) {
+static void Swap(int* a1, int* a2) {
     int tmp = *a1;
     *a1 = *a2;
     *a2 = tmp;
