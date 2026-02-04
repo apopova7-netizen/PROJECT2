@@ -14,7 +14,7 @@ void Reverse(int* arr, int start, int end) {
 
     while (start < end) {
 
-        int tmp = *(arr + start);
+        int tmp = *(arr + start); 
         *(arr + start) = *(arr + end);
         *(arr + end) = tmp;
 
