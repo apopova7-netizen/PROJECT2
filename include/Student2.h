@@ -16,7 +16,7 @@ typedef struct list {
 void Swap(int* a1, int* a2);
 void Reverse(int* arr, int start, int end);
 void Sorting(int* arr, int n);
-int NoDuplicate(int arr[],int n);
+int  NoDuplicate(int arr[],int n);
 void PrintPermutation(int* perm,int n);
 
 bool NextPermutationNarayana(int* arr, int n);
@@ -32,7 +32,7 @@ void ChoosePermutationNarayana(int arr[], int n,void (*callback)
                                        (int* perm, int n), int direction);
 
 
-int Factorial(int n);
+int Factorial2(int n);
 void PermutationFromIndex(int* arr, int n,
                          int index, int result[]);
 void PermutationsFactorialSystem(int arr[],
@@ -44,7 +44,7 @@ void Insert(LIST* list, int value, int indInsert);
 bool IsEmpty(const LIST* list);
 void Pop(LIST* list);
 void DeletingListElements(LIST* list);
-int NextInversionTable(int* inv, int n);
+int  NextInversionTable(int* inv, int n);
 void PermutationFromInversionTable(const int* invTable, int n,const int* arr,int* res);
 
 void Sorting2dBubble(int** arr, int quantityPerm, int n);
@@ -55,6 +55,7 @@ void PermutationsPlusOne(int arr[], int n,
 #define MAX_LENGTH_ARRAY 12
 
 #endif //PROJECT2_STUDENT2_H
+
 
 
 
