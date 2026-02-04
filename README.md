@@ -47,7 +47,7 @@ make clean
    _______
 ## Build  
 ```bush
-make exsamples         
+make examples         
 make tests
 make clean
 ```       
