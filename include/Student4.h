@@ -46,7 +46,8 @@ typedef struct {
 // main function
 void ExecutePermutation(int arr[], int n, PermutationParams params);
 // Benchmark function
-void Benchmark(int n);
+void AllPermutationBenchmark(int n);
+void PermutationBenchmark(int* arr, int n, PermutationParams params)
 // adaptive selection
 void ExecuteAdaptivePermute(int arr[], int n, void (*callback)(int*, int));
 
