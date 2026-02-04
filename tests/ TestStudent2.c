@@ -133,12 +133,12 @@ int TestNoDuplicate() {
 int TestFactorial2() {
     START("Factorial");
 
-    CHECK(Factorial(0) == 1, "0! should be 1");
-    CHECK(Factorial(1) == 1, "1! should be 1");
-    CHECK(Factorial(2) == 2, "2! should be 2");
-    CHECK(Factorial(3) == 6, "3! should be 6");
-    CHECK(Factorial(4) == 24, "4! should be 24");
-    CHECK(Factorial(5) == 120, "5! should be 120");
+    CHECK(Factorial2(0) == 1, "0! should be 1");
+    CHECK(Factorial2(1) == 1, "1! should be 1");
+    CHECK(Factorial2(2) == 2, "2! should be 2");
+    CHECK(Factorial2(3) == 6, "3! should be 6");
+    CHECK(Factorial2(4) == 24, "4! should be 24");
+    CHECK(Factorial2(5) == 120, "5! should be 120");
 
     END();
 }
@@ -850,6 +850,7 @@ int main() {
     return 0;
 
 }
+
 
 
 
