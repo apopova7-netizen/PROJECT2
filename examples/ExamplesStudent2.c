@@ -147,25 +147,25 @@ int main() {
 
     puts("===================================================================================");
 
-    int arr8[] = {3,11,4,1,0,6,2324,5};
-    int n8 = sizeof(arr8) / sizeof(int);
+    int arr8[] = {3,11,4,1,0};
+    int n5 = sizeof(arr8) / sizeof(int);
 
-    printf("n = %d, arr = {3,11,4,1,0,6,2324,5}\n", n8);
+    printf("n = %d, arr = {3,11,4,1,0}\n", n5);
 
     puts("PermutationNarayana");
-    PermutationNarayana(arr8,n8,PrintPermutation);
+    PermutationNarayana(arr8,n5,PrintPermutation);
     puts("PermutationReverseNarayana");
-    PermutationReverseNarayana(arr8,n8,PrintPermutation);
+    PermutationReverseNarayana(arr8,n5,PrintPermutation);
     puts("ChoosePermutationNarayana, direction = 1");
-    ChoosePermutationNarayana(arr8,n8,PrintPermutation,1);
+    ChoosePermutationNarayana(arr8,n5,PrintPermutation,1);
     puts("ChoosePermutationNarayana, direction = 1");
-    ChoosePermutationNarayana(arr8,n8,PrintPermutation,0);
+    ChoosePermutationNarayana(arr8,n5,PrintPermutation,0);
     puts("PermutationsFactorialSystem");
-    PermutationsFactorialSystem(arr8,n8,PrintPermutation);
+    PermutationsFactorialSystem(arr8,n5,PrintPermutation);
     puts("PermutationsInversionTable");
-    PermutationsInversionTable(arr8,n8,PrintPermutation);
+    PermutationsInversionTable(arr8,n5,PrintPermutation);
     puts("PermutationsPlusOne");
-    PermutationsPlusOne(arr8,n8,PrintPermutation);
+    PermutationsPlusOne(arr8,n5,PrintPermutation);
 
     return 0;
 
