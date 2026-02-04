@@ -49,6 +49,6 @@ void ExecutePermutation(int arr[], int n, PermutationParams params);
 void AllPermutationBenchmark(int n);
 void PermutationBenchmark(int* arr, int n, PermutationParams params);
 // adaptive selection
-void ExecuteAdaptivePermute(int arr[], int n, void (*callback)(int*, int));
+void ExecuteAdaptivePermutation(int* arr, int n, void (*callback)(int*, int));
 
 #endif
