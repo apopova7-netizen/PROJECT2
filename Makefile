@@ -18,11 +18,11 @@ TestStudent%.o: tests/TestStudent%.c include/Student%.h
 	$(CC) -Iinclude -c tests/TestStudent$*.c -o TestStudent$*.o
 
 
-examples: ExamplesProgram1 ExamplesProgram2 ExamplesProgram3 ExamplesProgram4
+examples: ExamplesProgram1 ExamplesProgram2 ExamplesProgram3 
 	./ExamplesProgram1
 	./ExamplesProgram2
 	./ExamplesProgram3
-	./ExamplesProgram4
+
 
 tests: TestProgram1 TestProgram2 TestProgram3 
 	./TestProgram1
@@ -32,6 +32,7 @@ tests: TestProgram1 TestProgram2 TestProgram3
 clean:
 	rm -f *.o ExamplesProgram1 ExamplesProgram2 ExamplesProgram3 ExamplesProgram4 \
 	TestProgram1 TestProgram2 TestProgram3 
+
 
 
 
