@@ -8,7 +8,7 @@ void SimplePrint(int* perm, int n){
 int main(){
     int data1[] = {1, 1, 2};
     printf("Adaptive:\n");
-    ExecuteAdaptivePermutation(data1, 3, simple_print);
+    ExecuteAdaptivePermutation(data1, 3, SimplePrint);
   
     int data2[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
     printf("\nAdaptive(large n):\n");
