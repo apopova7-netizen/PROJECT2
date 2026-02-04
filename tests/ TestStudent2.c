@@ -1,4 +1,5 @@
 
+
 #include "Student2.h"
 
 int TestsPassed = 0;
@@ -38,7 +39,7 @@ int TestSwap() {
     int a = 5, b = 10;
 
     printf("Before: a = %d, b = %d\n",a,b);
-    Swap(&a, &b);
+    Swap2(&a, &b);
     printf("After: a = %d, b = %d\n",a,b);
 
     CHECK(a == 10, "a should be equal to 10");
@@ -393,7 +394,7 @@ int TestNextPermutationNarayana() {
                                         " should not change");
     printf("=======================\n");
 
-    int arr3[] = {12};
+    int arr3[] = {42};
 
     printf("Before: ");
     PrintPermutation(arr3,1);
@@ -443,7 +444,7 @@ int TestPrevPermutationNarayana() {
                                         " change");
     printf("=======================\n");
 
-    int arr3[] = {22};
+    int arr3[] = {42};
 
     printf("Before: ");
     PrintPermutation(arr3,1);
@@ -502,7 +503,7 @@ int CallbackCounter = 0;
 
 void CountingCallback(int* perm, int n) {
     CallbackCounter++;
-    PrintPermutation(perm,n);
+    PrintPermutation(perm,n);/////////////////////////////////////////////////////////////////////////////
 
 }
 
@@ -565,6 +566,9 @@ int TestChoosePermutationNarayana() {
     END();
 
 }
+
+
+
 
 int TestPermutationFromIndex() {
     START("PermutationFromIndex");
@@ -850,6 +854,7 @@ int main() {
     return 0;
 
 }
+
 
 
 
