@@ -85,8 +85,9 @@ and checks the execution time for each algorithm.
 2) checks the execution time for algorithm
 */
 // iteration counter
+unsigned long long counter = 0;
 void BenchmarkCallback(int* perm, int n) {
-    g_counter++;
+    counter++;
 }
 
 // for PERM_CONSTRAINED
@@ -108,7 +109,6 @@ void AllPermutationBenchmark(int n){
         "Narayana(S2)", "Factorial System(S2)", "Inversion Table(S2)", "Plus One(S2)",
         "Johnson-Trotter(S3)", "Heap(S3)", "Minimal Change(S3)", "Cycle Leader(S3)", "Binary Masks(S3)", "Pseudo-Lex(S3)"
     };
-    unsigned long long counter = 0;
 
     for (int m = 0; m <= PERM_PSEUDO_LEX; m++){
         counter = 0;
@@ -120,7 +120,7 @@ void AllPermutationBenchmark(int n){
         params.direction = 1;
         // resetting the array
         for(int i = 0; i < n; i++) 
-            (testArr + i) = i + 1;
+            *(testArr + i) = i + 1;
         clock_t start = clock();
         ExecutePermutation(testArr, n, params);
         clock_t end = clock();
