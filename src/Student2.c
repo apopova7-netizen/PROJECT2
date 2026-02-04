@@ -1,8 +1,9 @@
 
+
 #include "Student2.h"
 
 //2.1, 2.5
-static void Swap(int* a1, int* a2) {
+void Swap2(int* a1, int* a2) {
     int tmp = *a1;
     *a1 = *a2;
     *a2 = tmp;
@@ -14,7 +15,7 @@ void Reverse(int* arr, int start, int end) {
 
     while (start < end) {
 
-        int tmp = *(arr + start); 
+        int tmp = *(arr + start);
         *(arr + start) = *(arr + end);
         *(arr + end) = tmp;
 
@@ -31,7 +32,7 @@ void Sorting(int* arr,int n){
         for (int j = 0; j < n - i - 1; j++) {
 
             if (*(arr + j) > *(arr + j + 1))
-                Swap(arr + j, arr + j + 1);
+                Swap2(arr + j, arr + j + 1);
         }
 }
 
@@ -93,7 +94,7 @@ bool NextPermutationNarayana(int* arr, int n) {
 
     /*Swaps these elements and expands the tail of the list from
      *the element following the element with the index i */
-    Swap(arr + j,arr + i);
+    Swap2(arr + j,arr + i);
     Reverse(arr, i + 1, n - 1);
 
     return true;
@@ -119,7 +120,7 @@ bool PrevPermutationNarayana(int* arr, int n) {
     while (*(arr + j) >= *(arr + i))
         j--;
 
-    Swap(arr + i,arr + j);
+    Swap2(arr + i,arr + j);
     Reverse(arr, i + 1, n - 1);
 
     return true;
@@ -223,7 +224,7 @@ bool ChooseStepPermutationNarayana(int* arr,int n, int direction) {
             j--;
 
 
-    Swap(arr + i,arr + j);
+    Swap2(arr + i,arr + j);
     Reverse(arr, i + 1, n - 1);
 
     return true;
@@ -699,6 +700,16 @@ void PermutationsPlusOne(int arr[], int n,
     free(copy);
     free(newcopy);
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
