@@ -13,7 +13,7 @@ typedef struct list {
     struct list* next;
 }LIST;
 
-void Swap(int* a1, int* a2);
+void Swap2(int* a1, int* a2);
 void Reverse(int* arr, int start, int end);
 void Sorting(int* arr, int n);
 int  NoDuplicate(int arr[],int n);
@@ -55,6 +55,7 @@ void PermutationsPlusOne(int arr[], int n,
 #define MAX_LENGTH_ARRAY 12
 
 #endif //PROJECT2_STUDENT2_H
+
 
 
 
