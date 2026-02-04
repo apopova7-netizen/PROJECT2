@@ -27,6 +27,13 @@ examples: ExamplesProgram1 ExamplesProgram2 ExamplesProgram3 ExamplesProgram4
 	./ExamplesProgram3
 	./ExamplesProgram4
 
+tests: TestProgram1 TestProgram2 TestProgram3 TestProgram4
+	./TestProgram1
+	./TestProgram2
+	./TestProgram3
+
+
 clean:
 	rm -f *.o ExamplesProgram1 ExamplesProgram2 ExamplesProgram3 ExamplesProgram4 \
 	TestProgram1 TestProgram2 TestProgram3
+
