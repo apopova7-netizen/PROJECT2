@@ -23,11 +23,17 @@ typedef struct ConstraintData {
     size_t numRelConstraints;
 } ConstraintData;
 
+#define MAX_CACHE_SIZE 1000
+
 typedef struct CacheElem {
-    char key[100];
+    char key[256];
     long value;
 } CacheElem;
 
+extern CacheElem cache[MAX_CACHE_SIZE];
+extern int cacheSize;
+
+void Swap(int *a, int *b);
 void Generate(int* arr, int n, int* curPerm, int depth, 
               char* used, void (*callback)(int*, int));
 void PermutationsBacktrack(int arr[], int n, 
@@ -54,10 +60,10 @@ void PermutationsWithConstraints(int arr[], int n,
 long FindInCache(char *key);
 void SaveToCache(char *key, long value);
 long Factorial(long n);
-void Swap(int *a, int *b);
-void GenerateUniquePermutations(int arr[], int n, int start, int result[], 
-                                void (*callback)(int perm[], int n));
+long CountUniquePermutations(int arr[], int n);
+void GeneratePermutationsRecursive(int freq[], int maxVal, int depth, int len,
+                                   int cur[], void (*callback)(int [], int));
 void MultisetPermutations(int arr[], int n, 
-                          void (*callback)(int perm[], int n));
+                         void (*callback)(int perm[], int n));
 
 #endif  /* STUDENT1_H */ 
