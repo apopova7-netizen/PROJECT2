@@ -144,8 +144,6 @@ void PermRecursiveLexicographic(int arr[], int n,
 }
 
 
-
-
 /* 1.4 */
 /* The main function of checking the validity of partial solutions */
 bool CheckConstraint(int partial[], int k, int nextElem, void* data) {
@@ -187,7 +185,8 @@ bool CheckConstraint(int partial[], int k, int nextElem, void* data) {
 
 /* The basic recursive function of generating permutations with constraints */
 void GeneratePerm(int arr[], int n, int depth, int used[], int curPerm[], 
-                  bool (*constraint)(int partial[], int k, int nextElem, void* data), 
+                  bool (*constraint)
+                  (int partial[], int k, int nextElem, void* data), 
                   void* constraintData, 
                   void (*callback)(int perm[], int n)) {
     if (depth >= n) {
@@ -308,7 +307,6 @@ void GeneratePermutationsRecursive(int freq[], int maxVal, int depth, int len,
         callback(cur, len);
         return;
     }
-
     for (int i = 0; i <= maxVal; ++i) {
         if (freq[i] > 0) {
             cur[depth] = i;
@@ -337,4 +335,4 @@ void MultisetPermutations(int arr[], int n,
     }
     int cur[n];
     GeneratePermutationsRecursive(freq, maxVal, 0, n, cur, callback);
-}
+} 
