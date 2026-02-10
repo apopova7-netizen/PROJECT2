@@ -1,5 +1,11 @@
 #include "Student1.h"
 
+/* Auxiliary function for swapping two elements */
+void Swap(int *a, int *b) {
+    int tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
 
 /* 1.1 */
 /* A recursive function for generating permutations */
@@ -138,6 +144,8 @@ void PermRecursiveLexicographic(int arr[], int n,
 }
 
 
+
+
 /* 1.4 */
 /* The main function of checking the validity of partial solutions */
 bool CheckConstraint(int partial[], int k, int nextElem, void* data) {
@@ -179,8 +187,7 @@ bool CheckConstraint(int partial[], int k, int nextElem, void* data) {
 
 /* The basic recursive function of generating permutations with constraints */
 void GeneratePerm(int arr[], int n, int depth, int used[], int curPerm[], 
-                  bool (*constraint)
-                  (int partial[], int k, int nextElem, void* data), 
+                  bool (*constraint)(int partial[], int k, int nextElem, void* data), 
                   void* constraintData, 
                   void (*callback)(int perm[], int n)) {
     if (depth >= n) {
@@ -191,12 +198,12 @@ void GeneratePerm(int arr[], int n, int depth, int used[], int curPerm[],
         if (used[i]) continue;
         curPerm[depth] = arr[i];
         
-        bool constraint_passed = true;
+        bool constraintPassed = true;
         if (constraint != NULL) {
-            constraint_passed = constraint(curPerm, depth, arr[i], constraintData);
+            constraintPassed = constraint(curPerm, depth, arr[i], constraintData);
         }
         
-        if (constraint_passed) {
+        if (constraintPassed) {
             used[i] = 1;
             GeneratePerm(arr, n, depth + 1, used, curPerm, constraint, 
             constraintData, callback);
@@ -206,8 +213,7 @@ void GeneratePerm(int arr[], int n, int depth, int used[], int curPerm[],
 }
 
 
-/* An external interface function for generating 
-permutations with constraints */
+/* An external interface function for generating permutations with constraints */
 void PermutationsWithConstraints(int arr[], int n, 
                                  bool (*constraint)(int partial[], int k, 
                                  int nextElem, void* data), 
@@ -235,15 +241,8 @@ void PermutationsWithConstraints(int arr[], int n,
 
 /* 1.5 */
 
-CacheElem cache[1000];
+CacheElem cache[MAX_CACHE_SIZE];
 int cacheSize = 0;
-
-/* Auxiliary function for swapping two elements */
-void Swap(int *a, int *b) {
-    int tmp = *a;
-    *a = *b;
-    *b = tmp;
-}
 
 /* Key search in the cache */
 long FindInCache(char *key) {
@@ -257,52 +256,85 @@ long FindInCache(char *key) {
 
 /* Saving to the cache */
 void SaveToCache(char *key, long value) {
-    strcpy(cache[cacheSize].key, key);
-    cache[cacheSize++].value = value;
+    if (cacheSize < MAX_CACHE_SIZE) {
+        strcpy(cache[cacheSize].key, key);
+        cache[cacheSize++].value = value;
+    }
 }
 
-/* Factorial (recursive) */
+/* Factorial (recursive) with cache */
 long Factorial(long n) {
     if (n <= 1) return 1;
-    return n * Factorial(n - 1);
+    char key[256];
+    snprintf(key, sizeof(key), "%ld", n); 
+    long cached = FindInCache(key);
+    if (cached != -1) {
+        return cached;  
+    }
+    long result = n * Factorial(n - 1);
+    SaveToCache(key, result);
+    return result;
 }
 
+/* Counting the number of unique permutations 
+with a factorial */
+long CountUniquePermutations(int arr[], int n) {
+    if (n == 0) return 1;
+    int maxVal = arr[0];
+    for (int i = 1; i < n; ++i) {
+        if (arr[i] > maxVal) maxVal = arr[i];
+    }
+    int freq[maxVal + 1];
+    for (int i = 0; i <= maxVal; ++i) {
+        freq[i] = 0;
+    }
+    for (int i = 0; i < n; ++i) {
+        freq[arr[i]]++;
+    }
+    long numerator = Factorial(n);
+    long denominator = 1;
+    for (int i = 0; i <= maxVal; ++i) {
+        if (freq[i] > 0) {
+            denominator *= Factorial(freq[i]);
+        }
+    }
+    return numerator / denominator;
+}
 
-/* Generating unique permutations using memoization */
-void GenerateUniquePermutations(int arr[], int n, int start, int result[], 
-                                void (*callback)(int perm[], int n)) {
-    if (start >= n) {
-        callback(result, n);
+/* Recursive generation of permutations */
+void GeneratePermutationsRecursive(int freq[], int maxVal, int depth, int len,
+                                   int cur[], void (*callback)(int [], int)) {
+    if (depth == len) {
+        callback(cur, len);
         return;
     }
-    for (int i = start; i < n; ++i) {
-        bool duplicate = false;
-        for (int j = start; j < i; ++j) {
-            if (arr[j] == arr[i]) {
-                duplicate = true;
-                break;
-            }
+
+    for (int i = 0; i <= maxVal; ++i) {
+        if (freq[i] > 0) {
+            cur[depth] = i;
+            freq[i]--;
+            GeneratePermutationsRecursive(freq, maxVal, depth + 1, 
+                                         len, cur, callback);
+            freq[i]++;
         }
-        if (duplicate) continue;
-        Swap(&result[start], &arr[i]);
-        GenerateUniquePermutations(arr, n, start + 1, result, callback);
-        Swap(&result[start], &arr[i]);
     }
-} 
+}
 
 /* The main method of generating permutations */
-void MultisetPermutations(int arr[], int n, void (*callback)(int perm[], int n)) {
-    if (arr == NULL || n <= 0) return;  
-    if (n == 0) {
-        if (callback != NULL) {
-            callback(NULL, 0);
-        }
-        return;
+void MultisetPermutations(int arr[], int n, 
+                         void (*callback)(int perm[], int n)) {
+    if (arr == NULL || n <= 0) return;
+    int maxVal = arr[0];
+    for (int i = 1; i < n; ++i) {
+        if (arr[i] > maxVal) maxVal = arr[i];
     }
-    QuickSort(arr, 0, n - 1); 
-    int* result = (int*)malloc(n * sizeof(int));
-    if (!result) return;
-    memcpy(result, arr, n * sizeof(int));
-    GenerateUniquePermutations(arr, n, 0, result, callback);
-    free(result);
-} 
+    int freq[maxVal + 1];
+    for (int i = 0; i <= maxVal; ++i) {
+        freq[i] = 0;
+    } 
+    for (int i = 0; i < n; ++i) {
+        freq[arr[i]]++;
+    }
+    int cur[n];
+    GeneratePermutationsRecursive(freq, maxVal, 0, n, cur, callback);
+}
