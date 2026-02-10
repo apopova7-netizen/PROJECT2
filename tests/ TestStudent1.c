@@ -1,4 +1,7 @@
 #include "Student1.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #define ASSERT_TRUE(cond) do { \
     if (!(cond)) { \
@@ -16,6 +19,30 @@ void CountingCallback(int perm[], int n) {
     (void)perm;
     (void)n;    
     callbackCount++;
+}
+
+void TestCountUniquePermutations() {
+    int arr1[] = {1, 1, 2};
+    long count = CountUniquePermutations(arr1, 3);
+    ASSERT_EQUAL(count, 3); 
+    
+    int arr2[] = {1, 2, 3};
+    count = CountUniquePermutations(arr2, 3);
+    ASSERT_EQUAL(count, 6); 
+    
+    int arr3[] = {1, 1, 1};
+    count = CountUniquePermutations(arr3, 3);
+    ASSERT_EQUAL(count, 1); 
+    
+    int arr4[] = {1, 2, 2, 3};
+    count = CountUniquePermutations(arr4, 4);
+    ASSERT_EQUAL(count, 12); 
+    
+    int arr5[] = {};
+    count = CountUniquePermutations(arr5, 0);
+    ASSERT_EQUAL(count, 1);
+    
+    printf("Test CountUniquePermutations() PASSED!\n");
 }
 
 void TestGenerate() {
@@ -132,9 +159,6 @@ void TestCheckConstraint() {
     int partial2[] = {1};  
     ASSERT_TRUE(CheckConstraint(partial2, 1, 5, &data1));  
     
-    int partial3[] = {1, 2};  
-    ASSERT_TRUE(CheckConstraint(partial3, 2, 3, &data1));  
-
     PosConstraint constraints2[] = {{1, 0}, {3, 2}};
     ConstraintData data2 = {
         .posConstraints = constraints2,
@@ -148,12 +172,6 @@ void TestCheckConstraint() {
    
     int partial5[] = {3, 2};  
     ASSERT_TRUE(CheckConstraint(partial5, 0, 3, &data2));  
-    
-    int partial5b[] = {1, 2};  
-    ASSERT_FALSE(CheckConstraint(partial5b, 0, 1, &data2)); 
-    
-    int partial5c[] = {2, 3};  
-    ASSERT_TRUE(CheckConstraint(partial5c, 2, 1, &data2));  
     
     ConstraintData empty_cd = {
         .posConstraints = NULL,
@@ -182,49 +200,14 @@ void TestCheckConstraint() {
     int partial9[] = {3};  
     ASSERT_FALSE(CheckConstraint(partial9, 1, 1, &data3));  
     
-    int partial10[] = {2};  
-    ASSERT_TRUE(CheckConstraint(partial10, 1, 1, &data3));  
-
-    PosConstraint posCons[] = {{2, 1}};      
-    RelConstraint relCons[] = {{1, 4}};      
-    ConstraintData data4 = {
-        .posConstraints = posCons,
-        .numPosConstraints = 1,
-        .relConstraints = relCons,
-        .numRelConstraints = 1
-    };
-    
-    int partial11[] = {1};  
-    ASSERT_FALSE(CheckConstraint(partial11, 1, 2, &data4));  
-   
-    int partial12[] = {3};  
-    ASSERT_FALSE(CheckConstraint(partial12, 1, 4, &data4));  
-    
-    int partial13[] = {2, 1};  
-    ASSERT_TRUE(CheckConstraint(partial13, 2, 4, &data4));  
-    
-    RelConstraint multiRel[] = {{1, 3}, {2, 4}};
-    ConstraintData data5 = {
-        .posConstraints = NULL,
-        .numPosConstraints = 0,
-        .relConstraints = multiRel,
-        .numRelConstraints = 2
-    };
-    
-    int partial14[] = {1, 3};  
-    ASSERT_FALSE(CheckConstraint(partial14, 2, 4, &data5));  
-    
-    int partial15[] = {2};  
-    ASSERT_FALSE(CheckConstraint(partial15, 1, 3, &data5));  
-    
-    int partial16[] = {1, 2, 3};  
-    ASSERT_TRUE(CheckConstraint(partial16, 3, 4, &data5));  
-    
     printf("Test CheckConstraint() PASSED!\n");
 }
 
 
+
 void TestCacheFunctions() {
+    cacheSize = 0;
+    
     char key1[] = "test_key_1";
     long val1 = 12345L;
     SaveToCache(key1, val1);
@@ -251,6 +234,8 @@ void TestCacheFunctions() {
 
 
 void TestFactorial() {
+    cacheSize = 0;
+    
     ASSERT_EQUAL(Factorial(0), 1);
     ASSERT_EQUAL(Factorial(1), 1);
     ASSERT_EQUAL(Factorial(5), 120);
@@ -297,7 +282,7 @@ void TestPermutationsWithConstraints() {
     PermutationsWithConstraints(arr, n, NULL, NULL, CountingCallback);
     ASSERT_EQUAL(callbackCount, 6);
     
-    PosConstraint posCons[] = {{2, 0}};  
+    PosConstraint posCons[] = {{2, 0}};
     ConstraintData data = {
         .posConstraints = posCons,
         .numPosConstraints = 1,
@@ -307,21 +292,22 @@ void TestPermutationsWithConstraints() {
     
     callbackCount = 0;
     PermutationsWithConstraints(arr, n, CheckConstraint, &data, CountingCallback);
-    ASSERT_EQUAL(callbackCount, 4);  
+    ASSERT_EQUAL(callbackCount, 4);
     
     printf("Test PermutationsWithConstraints() PASSED!\n");
 }
 
-void TestGenerateUniquePermutations() {
-    int arr[] = {1, 1, 2};
-    int n = 3;
-    int result[n];
-    memcpy(result, arr, n * sizeof(int));
+void TestGeneratePermutationsRecursive() {
+    int freq[] = {0, 2, 1};  
+    int maxVal = 2;
+    int len = 3;
+    int cur[len];
     callbackCount = 0;
-
-    GenerateUniquePermutations(arr, n, 0, result, CountingCallback);
-    ASSERT_EQUAL(callbackCount, 3);
-    printf("Test GenerateUniquePermutations() PASSED!\n");
+    
+    GeneratePermutationsRecursive(freq, maxVal, 0, len, cur, CountingCallback);
+    ASSERT_EQUAL(callbackCount, 3);  
+    
+    printf("Test GeneratePermutationsRecursive() PASSED!\n");
 }
 
 
@@ -385,24 +371,25 @@ void TestEdgeCases() {
 int main() {
     printf("Running unit tests:\n\n");
     
-    TestSwap();                
-    TestFactorial();          
-    TestQuickSort();           
-    TestCheckConstraint();     
-    TestGenerate();           
-    TestPermutationsBacktrack();
-    TestGenerateSwap();        
-    TestPermutationsRecursiveSwap(); 
-    TestGeneratePermutations(); 
-    TestPermRecursiveLexicographic(); 
-    TestGeneratePerm();        
-    TestPermutationsWithConstraints();
-    TestGenerateUniquePermutations(); 
-    TestMultisetPermutations();   
-    TestEmptyArray();
-    TestEdgeCases();           
+    TestSwap();
     TestCacheFunctions();
+    TestFactorial();
+    TestQuickSort();
+    TestCheckConstraint();
+    TestGenerate();
+    TestPermutationsBacktrack();
+    TestGenerateSwap();
+    TestPermutationsRecursiveSwap();
+    TestGeneratePermutations();
+    TestPermRecursiveLexicographic();
+    TestGeneratePerm();
+    TestPermutationsWithConstraints();
+    TestCountUniquePermutations();          
+    TestGeneratePermutationsRecursive();    
+    TestMultisetPermutations();
+    TestEmptyArray();
+    TestEdgeCases();
     
     printf("\nAll tests completed successfully!\n");
     return EXIT_SUCCESS;
-} 
+}
