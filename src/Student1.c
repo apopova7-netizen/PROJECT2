@@ -191,12 +191,12 @@ void GeneratePerm(int arr[], int n, int depth, int used[], int curPerm[],
         if (used[i]) continue;
         curPerm[depth] = arr[i];
         
-        bool constraint_passed = true;
+        bool constraintPassed = true;
         if (constraint != NULL) {
-            constraint_passed = constraint(curPerm, depth, arr[i], constraintData);
+            constraintPassed = constraint(curPerm, depth, arr[i], constraintData);
         }
         
-        if (constraint_passed) {
+        if (constraintPassed) {
             used[i] = 1;
             GeneratePerm(arr, n, depth + 1, used, curPerm, constraint, 
             constraintData, callback);
