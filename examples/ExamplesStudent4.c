@@ -5,25 +5,30 @@ void SimplePrint(int* perm, int n){
     printf("\n");
 }
 
-int main(){
+void FuncPass(int* perm, int n){
+    return;
+}
+
+int main() {
+    puts("\nExamplesStudent4 starting:");
     int data1[] = {1, 1, 2};
-    printf("Adaptive:\n");
+    puts("\n>>> Adaptive: duplicates {1,1,2}");
     ExecuteAdaptivePermutation(data1, 3, SimplePrint);
   
     int data2[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
-    printf("\nAdaptive(large n):\n");
-    ExecuteAdaptivePermutation(data2, 11, NULL); 
+    puts("\n>>> Adaptive: Large n = 11");
+    puts("nothing for the speed of work (FuncPass)");
+    ExecuteAdaptivePermutation(data2, 11, FuncPass); 
 
     int data[] = {1, 2, 3, 4};
-    int n = 4;
-    PermutationParams params;
-    params.method = PERM_NARAYANA;
-    params.callback = SimplePrint;
-    params.direction = 1;
-    printf("Narayana:\n");
-    ExecutePermutation(data, n, params);
+    PermutationParams params = {PERM_NARAYANA, SimplePrint, NULL, NULL, 1};
+    puts("\n>>> Narayana Lexicographic (Forward)");
+    ExecutePermutation(data, 4, params);
 
-    AllPermutationBenchmark(6); 
-  
+    puts("\n>>> Benchmark: all algorithms");
+    puts(">>> Format: [Method Name] [Time] [Count]");
+    AllPermutationBenchmark(6);
+    puts("\n>>>ExamplesStudent4 end.");
+        
     return 0;
 }
