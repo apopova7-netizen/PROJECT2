@@ -23,7 +23,7 @@ int main(){
     printf("Narayana:\n");
     ExecutePermutation(data, n, params);
 
-    AllPermutationBenchmark(9); 
+    AllPermutationBenchmark(6); 
   
     return 0;
 }
